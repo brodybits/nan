@@ -14,8 +14,7 @@ Due to the evolution of the V8 API, it is necessary for NAN to provide a wrapper
 
 Also see the V8 Embedders Guide section on [Handles and Garbage Collection](https://developers.google.com/v8/embed#handles).
 
-<a name="api_nan_persistent_base"></a>
-### Nan::PersistentBase & v8::PersistentBase
+### [Nan::PersistentBase & v8::PersistentBase](#api-nan-persistent-base)
 
 A persistent handle contains a reference to a storage cell in V8 which holds an object value and which is updated by the garbage collector whenever the object is moved. A new storage cell can be created using the constructor or `Nan::PersistentBase::Reset()`. Existing handles can be disposed using an argument-less `Nan::PersistentBase::Reset()`.
 
@@ -108,10 +107,10 @@ _(note: this is implemented as `Nan::NonCopyablePersistentTraits` for older vers
 template<typename T> class NonCopyablePersistentTraits {
  public:
   typedef Persistent<T, NonCopyablePersistentTraits<T> > NonCopyablePersistent;
-  
+
   static const bool kResetInDestructor = false;
-  
-  template<typename S, typename M> 
+
+  template<typename S, typename M>
   static void Copy(const Persistent<S, M> &source,
                    NonCopyablePersistent *dest);
 

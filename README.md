@@ -117,7 +117,7 @@ An object reference that is independent of any `HandleScope` is a _persistent_ r
 
 Due to the evolution of the V8 API, it is necessary for NAN to provide a wrapper implementation of the `Persistent` classes to supply compatibility across the V8 versions supported.
 
- - <a href="doc/persistent.md#api_nan_persistent_base"><b><code>Nan::PersistentBase & v8::PersistentBase</code></b></a>
+ - <a href="doc/persistent.md#api-nan-persistent-base"><b><code>Nan::PersistentBase & v8::PersistentBase</code></b></a>
  - <a href="doc/persistent.md#api_nan_non_copyable_persistent_traits"><b><code>Nan::NonCopyablePersistentTraits & v8::NonCopyablePersistentTraits</code></b></a>
  - <a href="doc/persistent.md#api_nan_copyable_persistent_traits"><b><code>Nan::CopyablePersistentTraits & v8::CopyablePersistentTraits</code></b></a>
  - <a href="doc/persistent.md#api_nan_persistent"><b><code>Nan::Persistent</code></b></a>
