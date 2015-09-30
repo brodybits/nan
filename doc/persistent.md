@@ -108,10 +108,10 @@ _(note: this is implemented as `Nan::NonCopyablePersistentTraits` for older vers
 template<typename T> class NonCopyablePersistentTraits {
  public:
   typedef Persistent<T, NonCopyablePersistentTraits<T> > NonCopyablePersistent;
-  
+
   static const bool kResetInDestructor = false;
-  
-  template<typename S, typename M> 
+
+  template<typename S, typename M>
   static void Copy(const Persistent<S, M> &source,
                    NonCopyablePersistent *dest);
 
@@ -198,6 +198,12 @@ template<typename T, typename M> class Persistent : public PersistentBase<T> {
 ```
 
 See the V8 documentation for [`Persistent`](https://v8docs.nodesource.com/io.js-3.0/d2/d78/classv8_1_1_persistent.html) for further information.
+
+**Tip:** To get the original `v8::Local` object reference back from a `PersistentBase` or `Persistent` object:
+
+```c++
+v8::Local<v8::Object> object = Nan::New(persistent);
+```
 
 <a name="api_nan_global"></a>
 ### Nan::Global
