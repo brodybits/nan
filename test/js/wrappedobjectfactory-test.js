@@ -11,11 +11,13 @@ const test     = require('tap').test
     , bindings = require('bindings')({ module_root: testRoot, bindings: 'wrappedobjectfactory' });
 
 test('objectwraphandle', function (t) {
-  t.plan(3);
+  t.plan(4);
 
   var obj = bindings.newFactoryObjectInstance(123);
 
   t.type(obj.getValue, 'function');
   t.type(obj.getValue(), 'number');
   t.equal(obj.getValue(), 123);
+  obj.increment();
+  t.equal(obj.getValue(), 124);
 });
