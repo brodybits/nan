@@ -11,7 +11,7 @@ const test     = require('tap').test
     , bindings = require('bindings')({ module_root: testRoot, bindings: 'wrappedobjectfactory' });
 
 test('objectwraphandle', function (t) {
-  t.plan(4);
+  t.plan(5);
 
   var obj = bindings.newFactoryObjectInstance(123);
 
@@ -20,4 +20,7 @@ test('objectwraphandle', function (t) {
   t.equal(obj.getValue(), 123);
   obj.increment();
   t.equal(obj.getValue(), 124);
+
+  var another = obj.makeAnotherFactoryObject(456);
+  t.equal(another.getValue(), 456);
 });

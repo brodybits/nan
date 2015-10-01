@@ -199,6 +199,10 @@ class ObjectWrapTemplate : public Nan::ObjectWrap {
     for (int i=0; i<argc; ++i) argv.push_back(info[i]);
     info.GetReturnValue().Set(cons->NewInstance(argc, &argv[0]));
   }
+  static inline v8::Local<v8::Value> NewInstanceMethod(int argc, v8::Local<v8::Value> argv[]) {
+    v8::Local<v8::Function> cons = Nan::New(constructor());
+    return cons->NewInstance(argc, argv);
+  }
 
   static inline T * ObjectFromMethodArgsInfo(Nan::NAN_METHOD_ARGS_TYPE info) {
     return ObjectWrap::Unwrap<T>(info.This());
