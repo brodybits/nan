@@ -172,7 +172,7 @@ class ObjectWrapTemplate : public Nan::ObjectWrap {
   static inline void
   SetNewFunction(Nan::ADDON_REGISTER_FUNCTION_ARGS_TYPE target,
                  function_template tpl, const char * object_name) {
-    Set(target, Nan::New(object_name).ToLocalChecked(), tpl->GetFunction());
+    Nan::Set(target, Nan::New(object_name).ToLocalChecked(), tpl->GetFunction());
   }
 
   ObjectWrapTemplate() {}
@@ -186,11 +186,7 @@ class ObjectWrapTemplate : public Nan::ObjectWrap {
       obj->Wrap(info.This());
       info.GetReturnValue().Set(info.This());
     } else {
-      // XXX TODO MULTIPLE ARGS:
-      const int argc = 1;
-      v8::Local<v8::Value> argv[argc] = {info[0]};
-      v8::Local<v8::Function> cons = Nan::New(constructor());
-      info.GetReturnValue().Set(cons->NewInstance(argc, argv));
+      NewInstanceMethod(info);
     }
   }
 
@@ -198,17 +194,19 @@ class ObjectWrapTemplate : public Nan::ObjectWrap {
   // (same as static NAN_METHOD(NewInstanceMethod) { ... })
   static inline void NewInstanceMethod(Nan::NAN_METHOD_ARGS_TYPE info) {
     v8::Local<v8::Function> cons = Nan::New(constructor());
-    double value = info[0]->IsUndefined() ? 0 : info[0]->NumberValue();
-    v8::Local<v8::Value> argv[1] = {Nan::New(value)};
-    info.GetReturnValue().Set(cons->NewInstance(1, argv));
+    const int argc = info.Length();
+    std::vector<v8::Local<v8::Value> > argv;
+    for (int i=0; i<argc; ++i) argv.push_back(info[i]);
+    info.GetReturnValue().Set(cons->NewInstance(argc, &argv[0]));
   }
+
   static inline T * ObjectFromMethodArgsInfo(Nan::NAN_METHOD_ARGS_TYPE info) {
     return ObjectWrap::Unwrap<T>(info.This());
   }
 
  private:
-  static inline Persistent<v8::Function> & constructor() {
-    static Persistent<v8::Function> constructor_;
+  static inline Nan::Persistent<v8::Function> & constructor() {
+    static Nan::Persistent<v8::Function> constructor_;
     return constructor_;
   }
 };
