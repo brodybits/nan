@@ -56,6 +56,7 @@ LINT_SOURCES = \
 	test/cpp/nannew.cpp \
 	test/cpp/news.cpp \
 	test/cpp/objectwraphandle.cpp \
+	test/cpp/objectwraptemplate.cpp \
 	test/cpp/persistent.cpp \
 	test/cpp/returnemptystring.cpp \
 	test/cpp/returnnull.cpp \

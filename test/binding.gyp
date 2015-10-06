@@ -110,6 +110,10 @@
       , "sources"     : [ "cpp/objectwraphandle.cpp" ]
     }
     , {
+        "target_name" : "objectwraptemplate"
+      , "sources"     : [ "cpp/objectwraptemplate.cpp" ]
+    }
+    , {
         "target_name" : "error"
       , "sources"     : [ "cpp/error.cpp" ]
     }
